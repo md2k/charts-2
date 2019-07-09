@@ -31,9 +31,17 @@ spec:
         - name: {{ . }}
         {{- end}}
       {{- end}}
-      {{- if .Values.mancenter.nodeSelector }}
+      {{- with .Values.mancenter.nodeSelector }}
       nodeSelector:
-{{ toYaml .Values.mancenter.nodeSelector | indent 8 }}
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.mancenter.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.mancenter.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
       {{- end }}
       hostNetwork: false
       hostPID: false

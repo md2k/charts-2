@@ -46,10 +46,22 @@ hazelcast:
   # configurationFiles are any additional Hazelcast configuration files
   # configurationFiles:
 
-
 # nodeSelector is an array of Hazelcast Node labels for POD assignments
 # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 nodeSelector: {}
+
+# Taints allows a node to repel a set of pods
+# If toleration is not set to correct value which is not match Nodes Taint(s) , node won't schedule Pods
+# Can be used if you want grant Hazelcast special Node Group and prevent any other Pods scheduling there
+# https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+# This is Array of Objects
+tolerations: []
+
+# Affinity is opposite functionality to Taints.
+# It is a property of pods that attracts them to a set of nodes (either as a preference or a hard requirement)
+# https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature
+affinity: {}
+
 
 gracefulShutdown:
   enabled: true
@@ -185,9 +197,21 @@ mancenter:
   # licenseKeySecretName is the name of the secret where the Hazelcast Management Center License Key is stored (can be used instead of licenseKey)
   # licenseKeySecretName:
 
-  # nodeSelector is an array of Hazelcast Management Center Node labels for POD assignments
+  # nodeSelector is an array of Hazelcast Node labels for POD assignments
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   nodeSelector: {}
+
+  # Taints allows a node to repel a set of pods
+  # If toleration is not set to correct value which is not match Nodes Taint(s) , node won't schedule Pods
+  # Can be used if you want grant Hazelcast special Node Group and prevent any other Pods scheduling there
+  # https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  # This is Array of Objects
+  tolerations: []
+
+  # Affinity is opposite functionality to Taints.
+  # It is a property of pods that attracts them to a set of nodes (either as a preference or a hard requirement)
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature
+  affinity: {}
 
   # Configure resource requests and limits
   # ref: http://kubernetes.io/docs/user-guide/compute-resources/
